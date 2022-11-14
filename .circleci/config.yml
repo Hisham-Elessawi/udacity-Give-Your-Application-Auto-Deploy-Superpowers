@@ -224,7 +224,7 @@ jobs:
             then
               curl https://kvdb.io/9eocji1tmnrNeDAmEQYaFP/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-
+      
   deploy-frontend:
     docker:
       - image: amazon/aws-cli
