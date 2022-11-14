@@ -157,12 +157,9 @@ jobs:
     docker:
       - image: python:3.7-alpine3.11
     steps:
-      # Checkout code from git
       - checkout
-      # Add ssh keys with fingerprint
       - add_ssh_keys:
           fingerprints: ["e7:15:55:ff:e2:91:e5:d9:47:32:4e:f5:21:54:b5:10"]
-      # attach workspace
       - attach_workspace:
           at: ~/
       - run:
@@ -177,6 +174,7 @@ jobs:
           name: Configure server
           command: |
             cat ~/project/.circleci/ansible/inventory.txt
+            export ANSIBLE_HOST_KEY_CHECKING=False
             ansible-playbook -i ~/project/.circleci/ansible/inventory.txt ~/project/.circleci/ansible/configure-server.yml
 
 
