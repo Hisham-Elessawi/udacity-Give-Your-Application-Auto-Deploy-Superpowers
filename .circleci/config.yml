@@ -197,29 +197,34 @@ jobs:
 
   run-migrations:
     docker:
-      - image: circleci/node:13.8.0
+      - image: sleavely/node-awscli:14 #circleci/node:13.8.0
     steps:
       - checkout
+      - run:
+          name: awscli install
+          command: |
+            sudo apt-get -y -qq update
+            sudo apt-get -qq install awscli
+            sudo apt-get -y -qq install python3
       - restore_cache:
           keys: [backend-build]
       - run:
           name: Run migrations
           command: |
             cd backend
-            source .env.sample
+            cat .env.sample
             npm install
-            npm audit fix
-            npm audit fix --audit-level=critical --force
+            npm run build
             npm run migrations > migrations_dump.txt
+            cat migrations_dump.txt
       - run:
-          name: Send migration results to memstash
+          name: Send migration results to kvdb
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
               curl https://kvdb.io/9eocji1tmnrNeDAmEQYaFP/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
       - destroy-environment:
-          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
 
   deploy-frontend:
     docker:
