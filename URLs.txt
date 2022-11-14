@@ -1,0 +1,4 @@
+1. Public Url to GitHub repository  (not private) [URL01]:
+
+https://github.com/Hisham-Elessawi/udacity-Give-Your-Application-Auto-Deploy-Superpowers
+
