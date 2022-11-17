@@ -227,17 +227,23 @@ jobs:
       
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
-            apk add curl
-            apk add --upgrade bash
-            apk add --update ansible
-            apk add openssh-client
-            pip3 install awscli
+            apk add --update tar
+            apk add --update gzip
+            apk add --update ansible 
+            apk add python curl
+            apk add --update nodejs
+            apk add --update npm
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - attach_workspace:
+          at: .circleci/ansible 
       - run:
           name: Get backend url
           command: |
