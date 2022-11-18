@@ -53,6 +53,7 @@ commands:
             sudo apt install software-properties-common -y
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt install ansible -y
+            
 jobs:
   build-frontend:
     docker:
@@ -202,14 +203,6 @@ jobs:
           fingerprints: ["e7:15:55:ff:e2:91:e5:d9:47:32:4e:f5:21:54:b5:10"]
       - attach_workspace:
           at: ~/
-      # - run:
-      #     name: Install dependencies
-      #     command: |
-      #       apk add curl
-      #       apk add --upgrade bash
-      #       apk add --update ansible
-      #       apk add openssh-client
-      #       pip3 install awscli
       - run:
           name: Configure server
           command: |

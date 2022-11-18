@@ -12,13 +12,16 @@
 - name: "Add Node.js 13"
   become: true
   shell: |
+    
     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
     sudo apt install -y nodejs
+    sudo npm install --global n
+    sudo n 13.8.0
 
 - name: "install dependencies."
   become: true
   apt:
-    name: ["node.js" ,"npm", "python3"]
+    name: ["npm", "python3"]
     state: latest
     update_cache: yes
 
