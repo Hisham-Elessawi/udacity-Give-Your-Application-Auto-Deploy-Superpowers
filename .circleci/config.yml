@@ -42,7 +42,7 @@ commands:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install 
-            
+
   install_ansible:
     description: Install Ansible
     steps:
@@ -197,6 +197,7 @@ jobs:
     steps:
       - checkout
       - install_awscli
+      - install_ansible
       - add_ssh_keys:
           fingerprints: ["e7:15:55:ff:e2:91:e5:d9:47:32:4e:f5:21:54:b5:10"]
       - attach_workspace:
