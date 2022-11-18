@@ -236,7 +236,8 @@ jobs:
             then
               curl https://kvdb.io/SFS9UzXRS8KdmqwwzCsC1y/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
             fi
-      - revert-migrations
+      - revert-migrations:
+          workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
   # deploy-frontend:
   #   docker:
   #     - image: python:3.7-alpine3.11
