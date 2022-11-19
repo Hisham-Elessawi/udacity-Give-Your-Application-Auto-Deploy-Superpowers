@@ -34,8 +34,8 @@ Resources:
         - Ref: InstanceSecurityGroup
       KeyName: udacityKey
       ImageId: ami-08c40ec9ead489470
-      # Tags:
-      #   - Key: Name
-      #     Value: !Sub backend-${ID}
-      #   - key: Project
-      #     value: udapeople
+      Tags:
+        - Key: Name
+          Value: !Sub backend-${ID}
+        - key: Project
+          value: Udapeople
